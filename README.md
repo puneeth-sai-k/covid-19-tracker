@@ -9,7 +9,7 @@ It is also mobile friendly.
 
 2.Open terminal and cd to the covid-19-tracker.
 
-3.Type npm init and then install packages like expess,fetch-node,body-parser and map.js using command "npm i 'package name' ".
+3.Type npm init and then install packages like expess,fetch-node,body-parser,ejs and map.js using command "npm i 'package name' ".
 
 4.Then type node app.js and open browser and go to localhost:1337.
 
