@@ -19,7 +19,19 @@ app.set('view engine', 'ejs');
 var countryurl = "";
 var Country_name, Total_cases, Critical_cases, Total_deaths, Active_cases, Recovered_cases, Tests_done, Img_link;
 var tc, ac, rc, td, cc, dc;
+var wtc,wac,wrc,wtd,wcc,wd;
 
+fetch("https://disease.sh/v3/covid-19/all")
+  .then(res => res.json())
+  .then(json => {
+    wtc = json.cases;
+    wac= json.active;
+    wrc = json.recovered;
+    wtd = json.tests;
+    wcc = json.critical;
+    wd = json.deaths;
+  });
+  
 app.get("/", function(req, res) {
 
   res.render("corono", {
@@ -30,7 +42,13 @@ app.get("/", function(req, res) {
     recoveredcases: Recovered_cases,
     testsdone: Tests_done,
     criticalcases: Critical_cases,
-    deathcases: Total_deaths
+    deathcases: Total_deaths,
+    world_tc: wtc,
+    world_ac: wac,
+    world_rc: wrc,
+    world_cc: wcc,
+    world_td: wtd,
+    world_d: wd
   });
 
 });
