@@ -24,6 +24,12 @@ body{
   font-size: 1.2rem;
 }
 
+/* world stats */
+
+.top_head{
+  text-align: center;
+  margin: 7% 0 5%;
+}
 
 
 /* search button */
@@ -79,7 +85,7 @@ input[type="text"]:focus {
 /* top */
 
 .mapimage{
-  margin: 0 30%;
+  margin: 7% 30%;
   text-align: center;
 }
 
@@ -89,7 +95,7 @@ img#flag{
   text-align: center;
 }
 
-.mapimage h2{
+.image_h{
   margin: 6%;
 }
 
