@@ -5,6 +5,7 @@ const fetch = require("node-fetch");
 const bodyparser = require("body-parser");
 const https = require("https");
 const chart = require("chart.js");
+const alert = require("alert");
 const app = express();
 app.use(express.static("public"));
 app.use(bodyparser.urlencoded({
@@ -19,22 +20,23 @@ app.set('view engine', 'ejs');
 var countryurl = "";
 var Country_name, Total_cases, Critical_cases, Total_deaths, Active_cases, Recovered_cases, Tests_done, Img_link;
 var tc, ac, rc, td, cc, dc;
-var wtc,wac,wrc,wtd,wcc,wd;
+var wtc, wac, wrc, wtd, wcc, wd;
 
 fetch("https://disease.sh/v3/covid-19/all")
   .then(res => res.json())
   .then(json => {
     wtc = json.cases;
-    wac= json.active;
+    wac = json.active;
     wrc = json.recovered;
     wtd = json.tests;
     wcc = json.critical;
     wd = json.deaths;
   });
-  
+
 app.get("/", function(req, res) {
 
   res.render("corono", {
+    error: Error,
     country_name: Country_name,
     img_link: Img_link,
     totalcases: Total_cases,
@@ -56,6 +58,19 @@ app.get("/", function(req, res) {
 app.post("/", function(req, res) {
   var country = req.body.country;
   var countryurl = "https://corona.lmao.ninja/v2/countries/" + country;
+  var countries = ["Afghanistan", "Albania", "Algeria", "Andorra", "Angola", "Anguilla", "Antigua & Barbuda", "Argentina", "Armenia", "Aruba", "Australia", "Austria", "Azerbaijan", "Bahamas", "Bahrain", "Bangladesh", "Barbados", "Belarus",
+    "Belgium", "Belize", "Benin", "Bermuda", "Bhutan", "Bolivia", "Bosnia & Herzegovina", "Botswana", "Brazil", "British Virgin Islands", "Brunei", "Bulgaria", "Burkina Faso", "Burundi", "Cambodia", "Cameroon", "Canada", "Cape Verde",
+    "Cayman Islands", "Central Arfrican Republic", "Chad", "Chile", "China", "Colombia", "Congo", "Cook Islands", "Costa Rica", "Cote D Ivoire", "Croatia", "Cuba", "Curacao", "Cyprus", "Czech Republic", "Denmark", "Djibouti", "Dominica",
+    "Dominican Republic", "Ecuador", "Egypt", "El Salvador", "Equatorial Guinea", "Eritrea", "Estonia", "Ethiopia", "Falkland Islands", "Faroe Islands", "Fiji", "Finland", "France", "French Polynesia", "French West Indies", "Gabon", "Gambia",
+    "Georgia", "Germany", "Ghana", "Gibraltar", "Greece", "Greenland", "Grenada", "Guam", "Guatemala", "Guernsey", "Guinea", "Guinea Bissau", "Guyana", "Haiti", "Honduras", "Hong Kong", "Hungary", "Iceland", "India", "Indonesia", "Iran", "Iraq",
+    "Ireland", "Isle ofMan", "Israel", "Italy", "Jamaica", "Japan", "Jersey", "Jordan", "Kazakhstan", "Kenya", "Kiribati", "Kosovo", "Kuwait", "Kyrgyzstan", "Laos", "Latvia", "Lebanon", "Lesotho", "Liberia", "Libya", "Liechtenstein", "Lithuania",
+    "Luxembourg", "Macau", "Macedonia", "Madagascar", "Malawi", "Malaysia", "Maldives", "Mali", "Malta", "Marshall Islands", "Mauritania", "Mauritius", "Mexico", "Micronesia", "Moldova", "Monaco", "Mongolia", "Montenegro", "Montserrat",
+    "Morocco", "Mozambique", "Myanmar", "Namibia", "Nauro", "Nepal", "Netherlands", "Netherlands Antilles", "New Caledonia", "New Zealand", "Nicaragua", "Niger", "Nigeria", "North Korea", "Norway", "Oman", "Pakistan", "Palau", "Palestine",
+    "Panama", "Papua New Guinea", "Paraguay", "Peru", "Philippines", "Poland", "Portugal", "Puerto Rico", "Qatar", "Reunion", "Romania", "Russia", "Rwanda", "Saint Pierre & Miquelon", "Samoa", "San Marino", "Sao Tome and Principe",
+    "Saudi Arabia", "Senegal", "Serbia", "Seychelles", "Sierra Leone", "Singapore", "Slovakia", "Slovenia", "Solomon Islands", "Somalia", "South Africa", "South Korea", "South Sudan", "Spain", "Sri Lanka", "St Kitts & Nevis", "St Lucia",
+    "St Vincent", "Sudan", "Suriname", "Swaziland", "Sweden", "Switzerland", "Syria", "Taiwan", "Tajikistan", "Tanzania", "Thailand", "Timor L'Este", "Togo", "Tonga", "Trinidad & Tobago", "Tunisia", "Turkey", "Turkmenistan", "Turks & Caicos",
+    "Tuvalu", "Uganda", "Ukraine", "United Arab Emirates", "United Kingdom", "United States of America", "Uruguay", "Uzbekistan", "Vanuatu", "Vatican City", "Venezuela", "Vietnam", "Virgin Islands (US)", "Yemen", "Zambia", "Zimbabwe"
+  ];
   fetch(countryurl)
     .then(res => res.json())
     .then(json => {
@@ -67,6 +82,10 @@ app.post("/", function(req, res) {
       Critical_cases = json.critical;
       Total_deaths = json.deaths;
       Img_link = json.countryInfo.flag;
+      res.redirect("/");
+    })
+    .catch(err => {
+      alert("Please Enter the Country Name Correctly !!");
       res.redirect("/");
     });
 });
