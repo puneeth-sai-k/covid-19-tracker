@@ -82,6 +82,58 @@ input[type="text"]:focus {
   opacity: .5;
 }
 
+.autocomplete {
+  position: relative;
+}
+
+.autocomplete-items {
+  border: 1px solid #d4d4d4;
+  border-bottom: none;
+  border-top: none;
+  z-index: 99;
+  /*position the autocomplete items to be the same width as the container:*/
+  top: 100%;
+  width: 50%;
+  text-align: center;
+}
+
+#myInputautocomplete-list{
+  margin-left: 23%;
+}
+
+.autocomplete-items div {
+  padding: 10px;
+  cursor: pointer;
+  background-color: #fff;
+  border-bottom: 1px solid #d4d4d4;
+
+}
+
+.autocomplete-items div:hover {
+  background-color: #e9e9e9;
+}
+
+
+.autocomplete-active {
+  background-color: DodgerBlue !important;
+  color: #ffffff;
+}
+
+/* error paragraph */
+
+.error{
+  background-color: red;
+  margin-left: 25%;
+  margin-right: 25%;
+  text-align: center;
+}
+
+#error{
+  margin-top: 4%;
+  font-weight: bold;
+  text-align: center;
+}
+
 /* top */
 
 .mapimage{
